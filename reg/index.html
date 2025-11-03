@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CICADA'25 Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #c9b697 0%, #d4c4a8 50%, #b8a88a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .kpr-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kpr-text {
+            text-align: left;
+        }
+
+        .kpr-text h3 {
+            font-size: 18px;
+            color: #2c2c2c;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .kpr-text p {
+            font-size: 12px;
+            color: #555;
+        }
+
+        .acm-logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .acm-diamond {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .acm-diamond span {
+            transform: rotate(-45deg);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .acm-circle {
+            width: 50px;
+            height: 50px;
+            background: #1e88e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .acm-text {
+            text-align: left;
+        }
+
+        .acm-text h3 {
+            font-size: 14px;
+            color: #2c2c2c;
+            margin: 0;
+        }
+
+        .cicada-title {
+            font-size: 120px;
+            font-weight: 900;
+            letter-spacing: -5px;
+            margin: 20px 0 10px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .cicada-red {
+            color: #8B0000;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .cicada-gray {
+            color: #4a5568;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #2c2c2c;
+            margin: 10px 0;
+        }
+
+        .hackathon-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c2c2c;
+            margin: 10px 0 30px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 50px 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-title h2 {
+            font-size: 60px;
+            font-weight: 900;
+            color: #8B0000;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .form-title h3 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #8B0000;
+            margin: 5px 0 20px;
+            line-height: 1;
+        }
+
+        .extended-date {
+            font-size: 24px;
+            color: #2c2c2c;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #8B0000;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:hover {
+            background: #6B0000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c2c2c;
+            margin: 20px 0 10px;
+        }
+
+        .footer-link {
+            text-align: center;
+            font-size: 16px;
+            color: #2c2c2c;
+            font-weight: 600;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+        }
+
+        .success-content h2 {
+            font-size: 36px;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+
+        .success-content p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            padding: 15px 40px;
+            background: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #6B0000;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        input.error, select.error {
+            border-color: #d32f2f;
+        }
+
+        @media (max-width: 768px) {
+            .cicada-title {
+                font-size: 60px;
+            }
+            .form-container {
+                padding: 30px 20px;
+            }
+            .form-title h2 {
+                font-size: 40px;
+            }
+            .form-title h3 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="kpr-logo">
+                    <div class="kpr-text">
+                        <h3>KPR Institute of</h3>
+                        <h3>Engineering and Technology</h3>
+                        <p>(Autonomous, NAAC "A")</p>
+                    </div>
+                </div>
+                <div class="acm-logos">
+                    <div class="acm-diamond">
+                        <span>ACM</span>
+                    </div>
+                    <div class="acm-circle">
+                        <span>ACM</span>
+                    </div>
+                    <div class="acm-text">
+                        <h3>Association for</h3>
+                        <h3>Computing Machinery</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="cicada-title">
+                <span class="cicada-red">CICADA</span><span class="cicada-gray">'25</span>
+            </div>
+            <div class="subtitle">CODE · DECODE · DISCOVER</div>
+            <div class="hackathon-text">24-HOUR NATIONAL LEVEL HACKATHON</div>
+        </div>
+
+        <div class="form-container">
+            <div class="form-title">
+                <h2>Registration</h2>
+                <h3>Extended</h3>
+                <p class="extended-date">till 22nd October, 2025</p>
+            </div>
+
+            <form id="registrationForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="college">College/University *</label>
+                    <input type="text" id="college" name="college" required>
+                    <div class="error-message" id="collegeError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year of Study *</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select Year</option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="4th">4th Year</option>
+                        <option value="postgrad">Post Graduate</option>
+                    </select>
+                    <div class="error-message" id="yearError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamName">Team Name *</label>
+                    <input type="text" id="teamName" name="teamName" required>
+                    <div class="error-message" id="teamNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamSize">Team Size *</label>
+                    <select id="teamSize" name="teamSize" required>
+                        <option value="">Select Size</option>
+                        <option value="1">Solo (1)</option>
+                        <option value="2">2 Members</option>
+                        <option value="3">3 Members</option>
+                        <option value="4">4 Members</option>
+                    </select>
+                    <div class="error-message" id="teamSizeError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Hackathon Experience *</label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Select Experience Level</option>
+                        <option value="first">First Hackathon</option>
+                        <option value="beginner">Beginner (1-2 hackathons)</option>
+                        <option value="intermediate">Intermediate (3-5 hackathons)</option>
+                        <option value="experienced">Experienced (5+ hackathons)</option>
+                    </select>
+                    <div class="error-message" id="experienceError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="github">GitHub Profile (Optional)</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername">
+                    <div class="error-message" id="githubError"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+
+        <div class="footer-text">Scan to Register</div>
+        <div class="footer-link">kpriet.edu.in | /KPRIETonline</div>
+    </div>
+
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Thank You!</h2>
+            <p>Your registration for CICADA'25 has been successfully submitted.<br><br>Check your email for further details.</p>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let registrations = [];
+
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Clear previous errors
+            clearErrors();
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                college: document.getElementById('college').value.trim(),
+                year: document.getElementById('year').value,
+                teamName: document.getElementById('teamName').value.trim(),
+                teamSize: document.getElementById('teamSize').value,
+                experience: document.getElementById('experience').value,
+                github: document.getElementById('github').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            // Validate form
+            let isValid = true;
+
+            if (!formData.fullName) {
+                showError('fullName', 'Please enter your full name');
+                isValid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!formData.email) {
+                showError('email', 'Please enter your email address');
+                isValid = false;
+            } else if (!emailRegex.test(formData.email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!formData.phone) {
+                showError('phone', 'Please enter your phone number');
+                isValid = false;
+            } else if (!phoneRegex.test(formData.phone)) {
+                showError('phone', 'Please enter a valid 10-digit phone number');
+                isValid = false;
+            }
+
+            if (!formData.college) {
+                showError('college', 'Please enter your college/university');
+                isValid = false;
+            }
+
+            if (!formData.year) {
+                showError('year', 'Please select your year of study');
+                isValid = false;
+            }
+
+            if (!formData.teamName) {
+                showError('teamName', 'Please enter your team name');
+                isValid = false;
+            }
+
+            if (!formData.teamSize) {
+                showError('teamSize', 'Please select team size');
+                isValid = false;
+            }
+
+            if (!formData.experience) {
+                showError('experience', 'Please select your experience level');
+                isValid = false;
+            }
+
+            // Validate GitHub URL if provided
+            if (formData.github) {
+                const urlRegex = /^https?:\/\/.+/;
+                if (!urlRegex.test(formData.github)) {
+                    showError('github', 'Please enter a valid URL (starting with http:// or https://)');
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Store registration
+            registrations.push(formData);
+            
+            console.log('New Registration:', formData);
+            console.log('Total Registrations:', registrations.length);
+
+            // Show success modal
+            document.getElementById('successModal').classList.add('show');
+
+            // Reset form
+            document.getElementById('registrationForm').reset();
+        }
+
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            const inputElement = document.getElementById(fieldId);
+            
+            if (errorElement && inputElement) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+                inputElement.classList.add('error');
+            }
+        }
+
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            const errorInputs = document.querySelectorAll('.error');
+            
+            errorMessages.forEach(error => {
+                error.classList.remove('show');
+                error.textContent = '';
+            });
+            
+            errorInputs.forEach(input => {
+                input.classList.remove('error');
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Remove error styling when user starts typing
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorElement = document.getElementById(this.id + 'Error');
+                if (errorElement) {
+                    errorElement.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
